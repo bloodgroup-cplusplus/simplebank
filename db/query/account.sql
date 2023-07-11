@@ -1,7 +1,7 @@
---name: CreateAuthor :one 
-INSERT INTO authors (
-    name, bio 
+INSERT INTO accounts (
+    owner,
+    balance,
+    currency
     ) VALUES (
-        $1,$2
-    )
-RETURNING *;
+        $1,$2,$3
+    )RETURNING *;
