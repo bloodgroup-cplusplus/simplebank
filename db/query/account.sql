@@ -6,12 +6,25 @@ INSERT INTO accounts (
         $1,$2,$3
     )RETURNING *;
 
---name: Genauthor :one 
+-- name: GetAccount :one 
 
-SELECT * FROM authors 
+SELECT * FROM accounts
 WHERE id = $1 LIMIT 1; 
 
---name: ListAuthors :many 
+-- name: ListAccounts :many 
 
-SELECT * FROM authors 
-ORDER BY name;
+SELECT * FROM accounts
+ORDER BY id
+LIMIT $1 
+OFFSET $2;
+
+-- name: UpdateAccount :one
+UPDATE accounts 
+SET balance = $2
+WHERE id = $1
+RETURNING *;
+
+
+-- name: DeleteAccount :exec 
+DELETE from accounts 
+WHERE id = $1;
